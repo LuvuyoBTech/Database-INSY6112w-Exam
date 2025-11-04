@@ -1,0 +1,51 @@
+> use Patients_St10477994
+< switched to db Patients_St10477994
+> db.createCollection("Paitents")
+< { ok: 1 }
+> db.Paitents.insertMany({"Patient Name":"Debbie", "Patient Surname":"Theart", "Date Of Birth":"1980-03-17"}),({"Patient Name":"Thomas", "Patient Surname":"Duncan", "Date Of Birth":"1976-08-12"})
+MongoInvalidArgumentError: Argument "docs" must be an array of documents
+> db.Paitents.insertOne({"Patient Name":"Debbie", "Patient Surname":"Theart","Date Of Birth":"1980-03-17"})
+< {
+  acknowledged: true,
+  insertedId: ObjectId('690a4cd3aa2f1870a8abb181')
+}
+>db.Paitents.insertOne({"Patient Name":"Thomas", "Patient Surname":"Duncan", "Date Of Birth":"1976-08-12"})
+<{
+  acknowledged: true,
+  insertedId: ObjectId('690a4d4daa2f1870a8abb182')
+}
+>db.Paitents.find().pretty()
+<{
+  _id: ObjectId('690a4cd3aa2f1870a8abb181'),
+  'Patient Name': 'Debbie',
+  'Patient Surname': 'Theart',
+  'Date Of Birth': '1980-03-17'
+}
+{
+  _id: ObjectId('690a4d4daa2f1870a8abb182'),
+  'Patient Name': 'Thomas',
+  'Patient Surname': 'Duncan',
+  'Date Of Birth': '1976-08-12'
+}
+> db.Paitents.find({"Date Of Birth": { $gt: '1979-01-12'}}).pretty
+< [Function: pretty] {
+  returnType: 'this',
+  serverVersions: [ '0.0.0', '999.999.999' ],
+  apiVersions: [ 0, Infinity ],
+  topologies: [ 'ReplSet', 'Sharded', 'LoadBalanced', 'Standalone' ],
+  returnsPromise: false,
+  deprecated: false,
+  platforms: [ 'Compass', 'Browser', 'CLI' ],
+  isDirectShellCommand: false,
+  acceptsRawInput: false,
+  shellCommandCompleter: undefined,
+  newShellCommandCompleter: undefined,
+  help: [Function (anonymous)] Help
+}
+> db.Paitents.find({"Date Of Birth":{ $gt: '1979-01-12'}})
+< {
+  _id: ObjectId('690a4cd3aa2f1870a8abb181'),
+  'Patient Name': 'Debbie',
+  'Patient Surname': 'Theart',
+  'Date Of Birth': '1980-03-17'
+}
